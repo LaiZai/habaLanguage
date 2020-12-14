@@ -52,7 +52,6 @@ function convertToSD() {
 
 function convertToZH() {
     if ($("#SD").is(":focus")) {
-        SDtxtToSpanImg();
         charCodeArr = [];
         var charCodePtr = 0;
         var charCodeTemp = '';
@@ -64,7 +63,8 @@ function convertToZH() {
 
         $allSpan = $("span");
         $allSpan.removeAttr("class,role,tabindex,style");
-
+        SDtxtToSpanImg();
+        
         for (var i = 0; i < $allSpan.length; i++) {
             spanArr[i] = $allSpan[i].innerHTML;
             if (spanArr[i].innerHTML == '<br>') {
