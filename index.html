@@ -1,0 +1,113 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<head>
+    <style>
+    [contentEditable=true]:empty:not(:focus):before {
+        content: attr(data-text)
+    }
+    </style>
+</head>
+
+<body bgcolor="#CCCCCC">
+    <div align="center">
+        <div id="ZH" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡輸入一般文字"></div>
+        <div id="SD" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡貼上南部話代碼(不接受手動輸入)"></div>
+        <!--         <button id="btnConvert" style="width: 45%; font-size: 20" onclick="convertToSD();">將一般文字轉換成南部話</button>
+        <button id="btnConvert2" style="width: 25%; font-size: 20" onclick="convertToZH();">將南部話轉換成一般文字</button>
+        <button id="btnConvert2" style="width: 20%; font-size: 20" onclick="copySDCode();">複製南部話代碼</button> -->
+    </div>
+</body>
+
+</html>
+<script>
+var SouthernDialect = [':RGBKangaroo:', ':Kangaroo:', ':huajji:', ':habaowl:', ':haba:', ':Detonationn:', ':deto_robot:', ':gu:', ':rdrrS:', ':pog:'];
+var SouthernDialectImgSrc = ['551050620682108938', '404348162787246100', '349165310366187522', '570188223503138828', '456020986467450890', '437967394670116865', '549440004846387220', '462593360658563072', '565925891751018498', '585806127413854208'];
+var ZH = document.getElementById("ZH");
+var SD = document.getElementById("SD");
+//var SDinnerHTMLNew;
+var inputText;
+var outputText;
+var charCodeArr = [];
+var $allSpan;
+var spanArr = [];
+var imgArr = [];
+
+function convertToSD() {
+    if ($("#ZH").is(":focus")) {
+        charCodeArr = [];
+        inputText = document.getElementById("ZH").innerHTML;
+        outputText = document.getElementById("SD");
+        outputText.innerHTML = "";
+        //console.log(inputText.charCodeAt(0) + ',' + String.fromCharCode(inputText.charCodeAt(0)));
+        for (var i = 0; i < inputText.length; i++) {
+            //charCodeArr[i] = inputText.charCodeAt(i);
+            // console.log(inputText.charCodeAt(i));
+            var toStr = String(inputText.charCodeAt(i));
+            for (var j = 0; j < toStr.length; j++) {
+                //outputText.innerHTML += '<img src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[toStr[j]] + '.png" width="20"> ';
+                outputText.innerHTML += '<span class=""><img aria-label="' + SouthernDialect[toStr[j]] + '" src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[toStr[j]] + '.png?v=1" alt="' + SouthernDialect[toStr[j]] + '" draggable="false" class="emoji" style="margin: 0px; padding: 0px; border: 0px; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: bottom; object-fit: contain; width: 1.375em; height: 1.375em; text-indent: -9999px;"></span>';
+            }
+            // if (i < inputText.length - 1) {
+            //     outputText.innerHTML += ".";
+            // }
+            outputText.innerHTML += '<span class="">.</span>';
+        }
+    }
+}
+
+function convertToZH() {
+    if ($("#SD").is(":focus")) {
+        charCodeArr = [];
+        var charCodePtr=0;
+        var charCodeTemp='';
+        spanArr = [];
+        imgArr = [];
+        inputText = document.getElementById("SD").innerHTML;
+        outputText = document.getElementById("ZH");
+        outputText.innerHTML='';
+        //outputText.innerHTML = "";
+        //console.log(inputText.charCodeAt(0) + ',' + String.fromCharCode(inputText.charCodeAt(0)));
+        //allSpan = document.getElementsByTagName('span');
+
+        $allSpan = $("span");
+        $allSpan.removeAttr("class,role,tabindex,style");
+        // $allSpan.removeAttr("class");
+        // $allSpan.removeAttr("role");
+        // $allSpan.removeAttr("tabindex");
+        // $allSpan.removeAttr("style");
+
+        for (var i = 0; i < $allSpan.length; i++) {
+            spanArr[i] = $allSpan[i].innerHTML;
+            imgArr[i] = $allSpan[i].getElementsByTagName('img')[0];
+            if(imgArr[i]!=null){
+                charCodeTemp+=''+(SouthernDialect.indexOf(imgArr[i].getAttribute("aria-label")));
+            }
+            else{
+                console.log(charCodeTemp);
+                charCodeArr[charCodePtr++]=String.fromCharCode(charCodeTemp);
+                outputText.innerHTML+=String.fromCharCode(charCodeTemp);
+                charCodeTemp='';
+            }
+        }
+    }
+}
+
+ZH.addEventListener('DOMSubtreeModified', convertToSD);
+SD.addEventListener('DOMSubtreeModified', convertToZH);
+
+// function SDtxtToImgAndConvert(e) {
+//     if (SD.innerHTML.indexOf(':') != -1) {
+//         //將discord的html語法替換
+//         SDinnerHTMLNew=SD.innerHTML;
+//         //SDinnerHTMLNew=SD.innerHTML.replace(/<[^>]*>|/g,"");
+//         for (var i = 0; i < SouthernDialect.length; i++) {
+//             SDinnerHTMLNew = SDinnerHTMLNew.replaceAll(SouthernDialect[i], '<img src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[i] + '.png" width="20"> ');
+//         }
+//         if (SDinnerHTMLNew != SD.innerHTML) {
+//             //SD.innerHTML = SDinnerHTMLNew;
+//         }
+//         //SD.innerHTML=SDinnerHTML;
+//     }
+// }
+</script>
