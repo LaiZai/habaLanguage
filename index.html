@@ -22,7 +22,6 @@ var SouthernDialect = [':RGBKangaroo:', ':Kangaroo:', ':huajji:', ':habaowl:', '
 var SouthernDialectImgSrc = ['551050620682108938', '404348162787246100', '349165310366187522', '570188223503138828', '456020986467450890', '437967394670116865', '549440004846387220', '462593360658563072', '565925891751018498', '585806127413854208'];
 var ZH = document.getElementById("ZH");
 var SD = document.getElementById("SD");
-//var SDinnerHTMLNew;
 var inputText;
 var outputText;
 var charCodeArr = [];
@@ -36,13 +35,9 @@ function convertToSD() {
         inputText = document.getElementById("ZH").innerHTML;
         outputText = document.getElementById("SD");
         outputText.innerHTML = "";
-        //console.log(inputText.charCodeAt(0) + ',' + String.fromCharCode(inputText.charCodeAt(0)));
         for (var i = 0; i < inputText.length; i++) {
-            //charCodeArr[i] = inputText.charCodeAt(i);
-            // console.log(inputText.charCodeAt(i));
             var toStr = String(inputText.charCodeAt(i));
             for (var j = 0; j < toStr.length; j++) {
-                //outputText.innerHTML += '<img src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[toStr[j]] + '.png" width="20"> ';
                 outputText.innerHTML += '<span class=""><img aria-label="' + SouthernDialect[toStr[j]] + '" src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[toStr[j]] + '.png?v=1" alt="' + SouthernDialect[toStr[j]] + '" draggable="false" class="emoji" style="margin: 0px; padding: 0px; border: 0px; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: bottom; object-fit: contain; width: 1.375em; height: 1.375em; text-indent: -9999px;"></span>';
             }
             outputText.innerHTML += '<span class="">.</span>';
@@ -73,7 +68,6 @@ function convertToZH() {
                 if (imgArr[i] != null) {
                     charCodeTemp += '' + (SouthernDialect.indexOf(imgArr[i].getAttribute("aria-label")));
                 } else {
-                    console.log(charCodeTemp);
                     charCodeArr[charCodePtr++] = String.fromCharCode(charCodeTemp);
                     outputText.innerHTML += String.fromCharCode(charCodeTemp);
                     charCodeTemp = '';
