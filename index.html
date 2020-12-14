@@ -90,12 +90,12 @@ SD.addEventListener('DOMSubtreeModified', convertToZH);
 function SDtxtToSpanImg() {
     //將discord的html語法替換
     SDinnerHTMLNew = SD.innerHTML;
-    if (SDinnerHTMLNew.indexOf(@'<span>.</span>') == -1) {
-        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('>.', '><span>.</span>');
+    if (SDinnerHTMLNew.indexOf('<span>.</span>') == -1) {
+        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('&lt;.', '&lt;<span>.</span>');
     }
     //SDinnerHTMLNew=SD.innerHTML.replace(/<[^>]*>|/g,"");
     for (var i = 0; i < SouthernDialect.length; i++) {
-        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('<:' + SouthernDialect[i] + ':' + SouthernDialectImgSrc[i] + '>', '<span class=""><img aria-label="' + SouthernDialect[i] + '" src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[i] + '.png?v=1" alt="' + SouthernDialect[i] + '" draggable="false" class="emoji" style="margin: 0px; padding: 0px; border: 0px; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: bottom; object-fit: contain; width: 1.375em; height: 1.375em; text-indent: -9999px;"></span>');
+        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('&lt;:' + SouthernDialect[i] + ':' + SouthernDialectImgSrc[i] + '&gt;', '<span class=""><img aria-label="' + SouthernDialect[i] + '" src="https://cdn.discordapp.com/emojis/' + SouthernDialectImgSrc[i] + '.png?v=1" alt="' + SouthernDialect[i] + '" draggable="false" class="emoji" style="margin: 0px; padding: 0px; border: 0px; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: bottom; object-fit: contain; width: 1.375em; height: 1.375em; text-indent: -9999px;"></span>');
     }
 
     if (SDinnerHTMLNew != SD.innerHTML) {
