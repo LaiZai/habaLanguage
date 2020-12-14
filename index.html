@@ -10,10 +10,11 @@
 </head>
 
 <body bgcolor="#CCCCCC">
-    <div align="center">
-        <div id="ZH" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡輸入一般文字(不接受emoji)"></div>
-        <div id="SD" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡貼上南部話代碼(不接受手動輸入)"></div>
-    </div>
+    <p>
+        <div align="center">
+            <div id="ZH" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡輸入一般文字(不接受emoji)"></div>
+            <div id="SD" align="left" contentEditable="true" style="overflow:auto; border:0px solid gray; display:inline-block; background-color: #DDDDDD; width: 45%;height: 300px; font-size: 20" data-text="在這裡貼上南部話代碼(不接受手動輸入)"></div>
+        </div>
 </body>
 
 </html>
@@ -52,6 +53,7 @@ function convertToSD() {
 
 function convertToZH() {
     if ($("#SD").is(":focus")) {
+        SDtxtToSpanImg();
         charCodeArr = [];
         var charCodePtr = 0;
         var charCodeTemp = '';
@@ -63,8 +65,7 @@ function convertToZH() {
 
         $allSpan = $("span");
         $allSpan.removeAttr("class,role,tabindex,style");
-        SDtxtToSpanImg();
-        
+
         for (var i = 0; i < $allSpan.length; i++) {
             spanArr[i] = $allSpan[i].innerHTML;
             if (spanArr[i].innerHTML == '<br>') {
