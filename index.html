@@ -64,7 +64,8 @@ function convertToZH() {
         outputText.innerHTML = '';
 
         $allSpan = $("span");
-        $allSpan.removeAttr("class,role,tabindex,style");
+        $allSpan.attr("class","");
+        $allSpan.removeAttr("role,tabindex,style");
 
         for (var i = 0; i < $allSpan.length; i++) {
             spanArr[i] = $allSpan[i].innerHTML;
@@ -91,8 +92,8 @@ SD.addEventListener('DOMSubtreeModified', convertToZH);
 function SDtxtToSpanImg() {
     //將discord的html語法替換
     SDinnerHTMLNew = SD.innerHTML;
-    if (SDinnerHTMLNew.indexOf('<span>.</span>') == -1) {
-        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('&gt;.', '&gt;<span>.</span>');
+    if (SDinnerHTMLNew.indexOf('.</span>') == -1) {
+        SDinnerHTMLNew = SDinnerHTMLNew.replaceAll('&gt;.', '&gt;<span class="">.</span>');
         SD.innerHTML = SDinnerHTMLNew;
     }
     //SDinnerHTMLNew=SD.innerHTML.replace(/<[^>]*>|/g,"");
