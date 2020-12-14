@@ -7,9 +7,6 @@
         content: attr(data-text)
     }
     </style>
-    <META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
-    <META HTTP-EQUIV="expires" CONTENT="0">
 </head>
 
 <body bgcolor="#CCCCCC">
@@ -56,7 +53,7 @@ function convertToSD() {
 
 function convertToZH() {
     if ($("#SD").is(":focus")) {
-        //SDtxtToSpanImg();
+        SDtxtToSpanImg();
         charCodeArr = [];
         var charCodePtr = 0;
         var charCodeTemp = '';
